@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixel Playground</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Pixel Playground home">
+        <span class="brand-mark">✦</span>
+        <span>pixel playground</span>
+      </a>
+      <div class="top-actions"><div class="best-score"><span class="dot"></span> best streak <strong id="bestStreak">0</strong></div><button class="owner-button" id="ownerOpen">✦ Owner</button></div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="eyebrow">THE TINY ARCADE FOR BIG BREAKS</div>
+        <h1>Pick a game.<br><em>Make a little magic.</em></h1>
+        <p>Five quick challenges, zero downloads, and plenty of bragging rights.</p>
+      </section>
+
+      <nav class="game-nav" aria-label="Choose a game">
+        <button class="game-tab active" data-game="reaction"><span>01</span> Reflex Rush</button>
+        <button class="game-tab" data-game="memory"><span>02</span> Match Up</button>
+        <button class="game-tab" data-game="clicker"><span>03</span> Button Mosh</button>
+        <button class="game-tab" data-game="color"><span>04</span> Color Catch</button>
+        <button class="game-tab" data-game="odd"><span>05</span> Odd Tile</button>
+      </nav>
+
+      <section class="game-panel" id="reactionGame">
+        <div class="panel-copy">
+          <div class="game-kicker">REFLEX RUSH <span>01</span></div>
+          <h2>Wait for green.<br>Then move fast.</h2>
+          <p>Click the board when it turns green. Too early and you’ll have to reset.</p>
+          <div class="stat-row"><div><small>LAST TIME</small><strong id="reactionTime">—</strong></div><div><small>BEST TIME</small><strong id="reactionBest">—</strong></div></div>
+        </div>
+        <button class="reaction-board" id="reactionBoard">Press start<br><small>your reflexes are waiting</small></button>
+      </section>
+
+      <section class="game-panel hidden" id="memoryGame">
+        <div class="panel-copy">
+          <div class="game-kicker">MATCH UP <span>02</span></div>
+          <h2>Find all<br>the pairs.</h2>
+          <p>Flip two tiles at a time. Clear the board in as few moves as you can.</p>
+          <div class="stat-row"><div><small>MOVES</small><strong id="memoryMoves">0</strong></div><div><small>PAIRS</small><strong id="memoryPairs">0 / 6</strong></div></div>
+          <button class="small-button" id="memoryReset">↻ &nbsp; New board</button>
+        </div>
+        <div class="memory-board" id="memoryBoard" aria-label="Memory game board"></div>
+      </section>
+
+      <section class="game-panel hidden" id="clickerGame">
+        <div class="panel-copy">
+          <div class="game-kicker">BUTTON MOSH <span>03</span></div>
+          <h2>Tap the dot.<br>Beat the clock.</h2>
+          <p>Hit the target as it jumps around the board. You have 20 seconds. Go!</p>
+          <div class="stat-row"><div><small>TIME LEFT</small><strong id="clickTime">20.0s</strong></div><div><small>HITS</small><strong id="clickScore">0</strong></div></div>
+        </div>
+        <div class="click-board" id="clickBoard"><button class="target" id="target" aria-label="Click target">✦</button><div class="click-start" id="clickStart">Press start<br><small>you have 20 seconds</small></div></div>
+      </section>
+
+      <section class="game-panel hidden" id="colorGame">
+        <div class="panel-copy"><div class="game-kicker">COLOR CATCH <span>04</span></div><h2>Read the word.<br>Catch the color.</h2><p>Choose the button whose ink matches the color named above it. Build a streak.</p><div class="stat-row"><div><small>STREAK</small><strong id="colorScore">0</strong></div><div><small>BEST</small><strong id="colorBest">0</strong></div></div></div>
+        <div class="color-board"><div class="color-prompt" id="colorPrompt">RED</div><div class="color-options" id="colorOptions"></div></div>
+      </section>
+
+      <section class="game-panel hidden" id="oddGame">
+        <div class="panel-copy"><div class="game-kicker">ODD TILE <span>05</span></div><h2>One tile<br>doesn’t fit.</h2><p>Find the slightly different tile before the pattern changes. Trust your eyes.</p><div class="stat-row"><div><small>ROUND</small><strong id="oddRound">0</strong></div><div><small>BEST</small><strong id="oddBest">0</strong></div></div></div>
+        <div class="odd-board" id="oddBoard" aria-label="Odd tile game board"></div>
+      </section>
+    </main>
+    <footer><span>made for tiny moments of joy</span><span>press a tab &nbsp;•&nbsp; play a round &nbsp;•&nbsp; repeat</span></footer>
+  </div>
+  <div class="owner-backdrop hidden" id="ownerBackdrop"><aside class="owner-panel" aria-labelledby="ownerTitle"><button class="close-owner" id="ownerClose" aria-label="Close owner panel">×</button><div class="game-kicker">PRIVATE CONTROL ROOM</div><h2 id="ownerTitle">Owner panel</h2><p class="owner-intro">Toggle playful power-ups for every game.</p><div id="passwordView"><label for="ownerPassword">Owner password</label><div class="password-row"><input id="ownerPassword" type="password" placeholder="Enter password"><button class="small-button" id="unlockOwner">Unlock</button></div><div class="password-error" id="passwordError"></div></div><div class="cheat-list hidden" id="cheatView"><label class="cheat-item"><input type="checkbox" data-cheat="reaction"> <span><strong>Reflex Rush</strong><small>Instant green light and 0 ms wins</small></span></label><label class="cheat-item"><input type="checkbox" data-cheat="memory"> <span><strong>Match Up</strong><small>Reveal every tile and auto-solve pairs</small></span></label><label class="cheat-item"><input type="checkbox" data-cheat="clicker"> <span><strong>Button Mosh</strong><small>Freeze timer and make the target huge</small></span></label><label class="cheat-item"><input type="checkbox" data-cheat="color"> <span><strong>Color Catch</strong><small>Highlight the correct answer</small></span></label><label class="cheat-item"><input type="checkbox" data-cheat="odd"> <span><strong>Odd Tile</strong><small>Reveal the odd tile</small></span></label><button class="small-button owner-lock" id="lockOwner">Lock panel</button></div></aside></div>
+  <script src="script.js"></script>
+</body>
+</html>
